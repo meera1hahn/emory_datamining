@@ -20,7 +20,7 @@ public class Unigram {
 		long currCount;
 		if(m_counts.get(attribute1)!=null){
 			currCount = m_counts.get(attribute1);
-			currCount = currCount+count;
+			currCount += count;
 			m_counts.put(attribute1, currCount);
 		}
 		else{
@@ -31,7 +31,7 @@ public class Unigram {
 	public Map<String, Long> getCountMap() {
 		return m_counts;
 	}
-	public Map<String,Double> getLikelihoodMap()
+	public Map<String, Double> getLikelihoodMap()
 	{
 		return m_likelihoods;
 	}

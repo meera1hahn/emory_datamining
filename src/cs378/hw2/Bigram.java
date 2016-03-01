@@ -49,7 +49,12 @@ public class Bigram {
 	public double getLikelihood(String attribute1, String attribute2)
 	{
 		Unigram unigram = m_unigrams.get(attribute1);
-		return (unigram != null) ? unigram.getLikelihood(attribute2) : smoothing.getUnseenLikelihood();
+		if (unigram != null) {
+			System.out.println(unigram.getLikelihood(attribute2));
+			return unigram.getLikelihood(attribute2);
+		
+		}
+		return smoothing.getUnseenLikelihood();
 	}
 	
 	public Set<String> getWordSet() {
