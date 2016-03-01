@@ -1,8 +1,10 @@
 package cs378.hw2;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,14 +122,17 @@ public class NaiveBayes {
 	
 
 
-	private void printStats(List<String> goldLabel, List<String> predictedLabel, String outputPath2) {
+	private void printStats(List<String> goldLabel, List<String> predictedLabel, String outputPath) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(outputPath)));
 		int i, correct = 0;
 		for(i = 0; i < goldLabel.size(); i++) {
-			System.out.println("Gold: " + goldLabel.get(i) + " Predicted: " + predictedLabel.get(i));
+			bw.write("Gold: " + goldLabel.get(i) + " Predicted: " + predictedLabel.get(i));
 			if(goldLabel.get(i).equals(predictedLabel.get(i))) correct++;
 		}
 		double percentCorrect = (double) correct / (double) i;
-		System.out.println("Percentage Correct: " + percentCorrect);
+		bw.write("Percentage Correct: " + percentCorrect);
+		bw.flush();
+		bw.close();
 	}
 
 }
