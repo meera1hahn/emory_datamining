@@ -1,4 +1,4 @@
-package cs378.hw2.Tree;
+package cs378.hw2;
 
 import java.io.*;
 import java.util.ArrayDeque;
