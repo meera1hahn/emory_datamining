@@ -1,4 +1,3 @@
-package cs378.hw2;
 
 public class AttBigram {
 	String label;
