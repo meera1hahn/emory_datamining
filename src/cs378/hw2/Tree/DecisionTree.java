@@ -1,37 +1,25 @@
 package cs378.hw2.Tree;
 
-import cs378.hw2.AbstractClassifier;
-
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by shureedkabir on 2/29/16.
  */
-public class DecisionTree extends AbstractClassifier {
+public class DecisionTree {
 
     DecisionTreeNode root;
-    String[][] instances;
-    double info_d;
-    HashMap<String, Double> classProbabilities;
 
-    public DecisionTree(List<String[]> instances){
-        this.instances = (String[][]) instances.toArray();
+    public DecisionTree(List<char[]> instances){
+        root = new DecisionTreeNode(instances);
     }
 
-    private void calculateInfo(){
-
-
-
-    }
-
-    @Override
-    public String classify(String[] features) {
+    public String classify(char[] features) {
         return null;
     }
 
-    @Override
-    public void train(List<String[]> trainingData) {
+    public void train() {
 
     }
 
