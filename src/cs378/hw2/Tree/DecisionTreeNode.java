@@ -128,6 +128,10 @@ public class DecisionTreeNode {
         return children;
     }
 
+    public DecisionTreeNode getChild(char[] fv){
+        return children.get(fv[ATTRIBUTE_SPLIT]);
+    }
+
     public static double logBase2(double x){
         if (x == 0) return 0;
 
