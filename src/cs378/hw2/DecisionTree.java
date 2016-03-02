@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by shureedkabir on 2/29/16.
+ * Created by shureedkabir on 2/29/16. C4.5 implementation
  */
 public class DecisionTree {
 
