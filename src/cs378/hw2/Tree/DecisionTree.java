@@ -2,6 +2,7 @@ package cs378.hw2.Tree;
 
 import cs378.hw2.AbstractClassifier;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,8 +10,18 @@ import java.util.List;
  */
 public class DecisionTree extends AbstractClassifier {
 
+    DecisionTreeNode root;
+    String[][] instances;
+    double info_d;
+    HashMap<String, Double> classProbabilities;
 
-    public DecisionTree(){
+    public DecisionTree(List<String[]> instances){
+        this.instances = (String[][]) instances.toArray();
+    }
+
+    private void calculateInfo(){
+
+
 
     }
 
@@ -23,5 +34,7 @@ public class DecisionTree extends AbstractClassifier {
     public void train(List<String[]> trainingData) {
 
     }
+
+
 
 }
