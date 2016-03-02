@@ -62,6 +62,7 @@ public class DecisionTreeNode {
         return index;
     }
 
+
     private void determineLabel() {
         HashMap<Character, Integer> counts = new HashMap<>();
 
@@ -89,6 +90,7 @@ public class DecisionTreeNode {
         return info;
     }
 
+
     private HashMap<Character, List<char[]>> splitDataByAttribute(int attribute){
         HashMap<Character, List<char[]>> partitions = new HashMap<>();
 
@@ -98,6 +100,7 @@ public class DecisionTreeNode {
 
         return partitions;
     }
+
 
     public HashMap<Character, DecisionTreeNode> splitIntoChildren(int attribute){
         ATTRIBUTE_SPLIT = attribute;
@@ -114,9 +117,11 @@ public class DecisionTreeNode {
         return children;
     }
 
+
     public DecisionTreeNode getChild(char[] fv){
         return children.get(fv[ATTRIBUTE_SPLIT]);
     }
+
 
     private static double logBase2(double x){
         if (x == 0) return 0;
