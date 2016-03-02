@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class DecisionTree {
 
-    DecisionTreeNode root;
+    private DecisionTreeNode root;
     boolean checked[];
     public DecisionTree(List<char[]> instances){
         root = new DecisionTreeNode(instances);
