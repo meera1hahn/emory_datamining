@@ -10,14 +10,11 @@ import java.util.Map;
  */
 public class DecisionTreeNode {
 
-
     public static final int CLASS_LABEL = 0;
     public int ATTRIBUTE_SPLIT = -1;
     public char label;
-
-    HashMap<Character, DecisionTreeNode> children;
-    List<char[]> instancesPartition;
-
+    private HashMap<Character, DecisionTreeNode> children;
+    private List<char[]> instancesPartition;
     double classInfo;
 
     public DecisionTreeNode(List<char[]> instancesPartition){
@@ -27,22 +24,18 @@ public class DecisionTreeNode {
 
 
     public int getBestAttribute(boolean[] checked){
-        int index = -1; //remains negative if below threshold
-
+        int index = -1;
         double bestGainRatio = 0;
         double attributeInfo;
         double gainRatio;
-        //calculate GR of each attribute
-
 
         if (instancesPartition.size() < 1) {
             determineLabel();
             return -1;
         }
+
         int numberOfAttributes = instancesPartition.get(0).length;
-
         HashMap<Character, List<char[]>> partition;
-
 
         for (int i = 0; i < numberOfAttributes; i++) {
 
@@ -52,9 +45,8 @@ public class DecisionTreeNode {
             partition = splitDataByAttribute(i);
             attributeInfo = 0;
 
-            for (Map.Entry<Character, List<char[]>> entry : partition.entrySet()) {
+            for (Map.Entry<Character, List<char[]>> entry : partition.entrySet())
                 attributeInfo += ((double) entry.getValue().size() / instancesPartition.size()) * calculateInfo(entry.getValue(), CLASS_LABEL);
-            }
 
             gainRatio = (classInfo - attributeInfo) / calculateInfo(instancesPartition, i);
 
@@ -62,7 +54,6 @@ public class DecisionTreeNode {
                 bestGainRatio = gainRatio;
                 index = i;
             }
-
         }
 
         if (index < 0)
@@ -74,16 +65,14 @@ public class DecisionTreeNode {
     private void determineLabel() {
         HashMap<Character, Integer> counts = new HashMap<>();
 
-        for (char[] instance : instancesPartition) {
-            counts.merge(instance[CLASS_LABEL], 1, (x, y) -> x+y);
-        }
+        for (char[] instance : instancesPartition)
+            counts.merge(instance[CLASS_LABEL], 1, (x, y) -> x + y);
 
         label = counts.entrySet().stream().max((x, y) -> x.getValue() - y.getValue()).get().getKey();
     }
 
 
-    //Info function
-    public double calculateInfo(List<char[]> instances, int attribute){
+    private double calculateInfo(List<char[]> instances, int attribute){
         HashMap<Character, Integer> counts = new HashMap<>();
         double info = 0;
 
@@ -98,10 +87,9 @@ public class DecisionTreeNode {
         }
 
         return info;
-
     }
 
-    public HashMap<Character, List<char[]>> splitDataByAttribute(int attribute){
+    private HashMap<Character, List<char[]>> splitDataByAttribute(int attribute){
         HashMap<Character, List<char[]>> partitions = new HashMap<>();
 
         for (char[] instance : instancesPartition)
@@ -118,10 +106,8 @@ public class DecisionTreeNode {
         HashMap<Character, List<char[]>> partitions = splitDataByAttribute(attribute);
 
 
-        for (Map.Entry<Character, List<char[]>> entry: partitions.entrySet()) {
+        for (Map.Entry<Character, List<char[]>> entry: partitions.entrySet())
             children.put(entry.getKey(), new DecisionTreeNode(entry.getValue()));
-        }
-
 
         instancesPartition = null; //clear for GC
 
@@ -132,16 +118,11 @@ public class DecisionTreeNode {
         return children.get(fv[ATTRIBUTE_SPLIT]);
     }
 
-    public static double logBase2(double x){
+    private static double logBase2(double x){
         if (x == 0) return 0;
 
         final double baseChange = Math.log(2);
 
         return Math.log(x)/baseChange;
     }
-
-    public double getClassInfo(){
-        return classInfo;
-    }
-
 }

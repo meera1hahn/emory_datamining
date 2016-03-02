@@ -14,6 +14,7 @@ public class DecisionTree {
 
     private DecisionTreeNode root;
     boolean checked[];
+
     public DecisionTree(List<char[]> instances){
         root = new DecisionTreeNode(instances);
         checked = new boolean[instances.get(0).length];
@@ -35,12 +36,10 @@ public class DecisionTree {
 
     public void train() {
         int index;
-
         ArrayDeque<DecisionTreeNode> pq = new ArrayDeque<>();
+        DecisionTreeNode current;
 
         pq.add(root);
-
-        DecisionTreeNode current;
 
         while (!pq.isEmpty()){
             current = pq.remove();
@@ -50,7 +49,6 @@ public class DecisionTree {
 
             pq.addAll(current.splitIntoChildren(index).values());
         }
-
     }
 
     /**
