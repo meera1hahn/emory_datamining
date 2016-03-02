@@ -1,8 +1,6 @@
 package cs378.hw2.Tree;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +50,7 @@ public class DecisionTree {
     }
 
     /**
-     * @param args {trainingDataPath, testDataPath}
+     * @param args {trainingDataPath, testDataPath, outputPath}
      *
      * Trains then tests on given datasets. Class label must be first character (position 0)
      */
@@ -69,19 +67,33 @@ public class DecisionTree {
 
         System.out.println();
 
-        runTest(tree, testInstances);
+        runTest(tree, testInstances, args[2]);
+
+
 
     }
 
-    private static void runTest(DecisionTree tree, List<char[]> testInstances) {
+    private static void runTest(DecisionTree tree, List<char[]> testInstances, String outputFile) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+
         int totalCorrect = 0;
+        char prediction;
 
         for (char[] testInstance : testInstances) {
-            if (tree.classify(testInstance) == testInstance[DecisionTreeNode.CLASS_LABEL])
+            prediction = tree.classify(testInstance);
+            if (prediction == testInstance[DecisionTreeNode.CLASS_LABEL])
                 totalCorrect++;
+
+            writer.write("Gold: "+testInstance[DecisionTreeNode.CLASS_LABEL]+" Prediction: "+prediction);
+            writer.newLine();
         }
 
         double result = (double) totalCorrect/testInstances.size();
+
+        writer.write(totalCorrect+" out of "+testInstances.size() + " correct ("+ result +"). ");
+        writer.newLine();
+        writer.flush();
+        writer.close();
 
         System.out.println(totalCorrect+" out of "+testInstances.size() + " correct ("+ result +"). ");
 
