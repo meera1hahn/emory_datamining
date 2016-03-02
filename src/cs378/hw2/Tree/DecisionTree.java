@@ -90,12 +90,12 @@ public class DecisionTree {
 
         double result = (double) totalCorrect/testInstances.size();
 
-        writer.write(totalCorrect+" out of "+testInstances.size() + " correct ("+ result +"). ");
+        writer.write(totalCorrect+" out of "+testInstances.size() + " correct ("+ result*100 +"). ");
         writer.newLine();
         writer.flush();
         writer.close();
 
-        System.out.println(totalCorrect+" out of "+testInstances.size() + " correct ("+ result +"). ");
+        System.out.println(totalCorrect+" out of "+testInstances.size() + " correct ("+ result*100 +"%). ");
 
     }
 
