@@ -1,4 +1,5 @@
 
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -125,11 +126,11 @@ public class NaiveBayes {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(outputPath)));
 		int i, correct = 0;
 		for(i = 0; i < goldLabel.size(); i++) {
-			bw.write("Gold: " + goldLabel.get(i) + " Predicted: " + predictedLabel.get(i));
+			bw.write("Gold: " + goldLabel.get(i) + " Predicted: " + predictedLabel.get(i) + "\n");
 			if(goldLabel.get(i).equals(predictedLabel.get(i))) correct++;
 		}
 		double percentCorrect = (double) correct / (double) i;
-		bw.write("Percentage Correct: " + percentCorrect);
+		bw.write("Percentage Correct: " + percentCorrect + "\n");
 		bw.flush();
 		bw.close();
 	}
