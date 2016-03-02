@@ -1,4 +1,3 @@
-package cs378.hw2;
 
 public class RunNaiveBayes {
     public static void main(String[] args) throws Exception {
